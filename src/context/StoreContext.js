@@ -1,6 +1,6 @@
 
-import {  createContext, useState, useEffect } from "react";
-import Client from 'shopify-buy'
+import React, {createContext, useState} from "react";
+import Client from "shopify-buy";
 
 const client = Client.buildClient({
   domain: process.env.REACT_APP_SHOPIFY_DOMAIN,
@@ -8,79 +8,42 @@ const client = Client.buildClient({
 });
 
 
-export const StoreContext = createContext()
+ const StoreContext = createContext();
 
 
 
- const StoreContextProvider = ( { children }) => {
+const  StoreContextProvider = ({children}) =>  {
 
-    const [ storeState, setStoreState ] = useState(
-        {
-          product: {},
-          products: [],
-          checkout: {},
-          isCartOpen : false,
-          isMenuOpen : false
+  const [storeState, setStoreState]= useState({
+    products: [],
+    product: {},
+  }) 
     
-        }
-      )
+  
+  const fetchAllProducts = async () => {
+    const products = await client.product.fetchAll();
+    setStoreState({...storeState, products: products });
+  };
 
-      useEffect(() => {
-        if(localStorage.checkout_id){
-          fetchCheckout(localStorage.checkout_id)
-          
-        }else{
-          createCheckout()
-          
-        }
-        
-      }, [])
+  const fetchProductByHandle = async (handle) => {
+    const product = await client.product.fetchByHandle(handle);
+    setStoreState({ product: product });
+    
 
-      useEffect(() => {
-        console.log(storeState, 'is state')
-      }, [storeState])
+    return product;
+  };
 
+ 
 
-      const createCheckout = async () => {
-        const checkout = await client.checkout.create()
-        localStorage.setItem("checkout_id", checkout.id)
-        setStoreState(
-          {...storeState, checkout : checkout})}
-
-
-      const  fetchCheckout = async (checkoutId) => {
-        client.checkout
-        .fetch((checkoutId))
-        .then((checkout) => {
-          setStoreState({
-            ...storeState,
-            checkout : checkout
-          })
-        })
-          }
-
-
-      const fetchAllProducts = async () =>{ 
-        const products = await client.product.fetchAll()
-        //console.log(products)
-        setStoreState(
-          {
-            ...storeState,
-            products : products
-      
-          }
-        )
-        
-        
-        }
-
-        
+     
     return (
       
         //Provider gives the child components access to the current authentication state
         <StoreContext.Provider value= {{
+          ...storeState,
           fetchAllProducts : fetchAllProducts,
-          createCheckout : createCheckout
+          fetchProductByHandle : fetchProductByHandle
+          
         }}  >
             { children }
         </StoreContext.Provider>
@@ -88,4 +51,7 @@ export const StoreContext = createContext()
 
 }
 
+const ShopConsumer = StoreContext.Consumer;
+
+export { ShopConsumer, StoreContext };
 export default StoreContextProvider

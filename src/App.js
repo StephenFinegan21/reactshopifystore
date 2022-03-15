@@ -1,39 +1,18 @@
-
-
-import { useContext, useEffect, useState } from "react";
-//import { ShopContext } from "./context/ShopContext";
-import { StoreContext } from './context/StoreContext'
-
-
-
+import React from 'react'
+import { Router } from 'react-router-dom'
+import Home from './pages/Home'
+import Product from './pages/Product'
+import {BrowserRouter, Routes, Route}  from 'react-router-dom'
 
 function App() {
-
- 
-  const {fetchAllProducts, products} = useContext(StoreContext)
- //console.log(fetchAllProducts)
-  
-
-  useEffect(() => {
-   fetchAllProducts()
-   console.log('fetched data is ',products)
-
-  }, [products])
-
-
-
-
-
-  
-//const {fetchAllProducts, products} = useContext(ShopContext)
-
   return (
-    <div className="App">
-  
-        <h3> Lets go for a beer? </h3>
-  
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element = {<Home />}></Route>
+        <Route path='/product/:handle' element = {<Product />}></Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
