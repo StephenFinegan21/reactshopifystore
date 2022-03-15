@@ -23,13 +23,17 @@ const StoreProvider = ({ children}) => {
 
     }
   )
-  /*
+  
   createCheckout = async () => {
-
+    const checkout = await client.checkout.create()
+    localStorage.setItem("checkout-id", checkout.id)
+    setStoreState({checkout : checkout})
   }
+ 
   fetchCheckout = async () => {
     
   }
+   /*
   addItemToCheckout = async () => {
     
   }
@@ -39,12 +43,16 @@ const StoreProvider = ({ children}) => {
   */
   const fetchAllProducts = async () =>{ 
     const products = await client.product.fetchAll()
-    setStoreState({products : products})
+    console.log(products[0])
+    setStoreState(
+      {...storeState,
+      products : products}
+    )
     
     }
-  /*
-  fetchProductWithHandle = async (handle) =>{ 
-
+  
+ 
+/*
   } 
   closeCart = async () =>{ 
 
@@ -62,8 +70,8 @@ const StoreProvider = ({ children}) => {
 
   return (
     <ShopContext.Provider value = {{
-                    ...storeState,
-                    fetchAllProducts : fetchAllProducts
+                    storeState,
+                    
                     
                     }}>
 

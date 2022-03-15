@@ -1,43 +1,26 @@
 
 
 import { useContext, useEffect, useState } from "react";
-import { ShopContext } from "./context/ShopContext";
-import Client from 'shopify-buy'
+//import { ShopContext } from "./context/ShopContext";
+import { StoreContext } from './context/StoreContext'
+
 
 
 
 function App() {
 
-  const [ storeState, setStoreState ] = useState(
-    {
-      product: {},
-      products: [],
-      checkout: {},
-      isCartOpen : false,
-      isMenuOpen : false
-
-    }
-  )
-
-  const fetchAllProducts = async () =>{ 
-    const products = await client.product.fetchAll()
-    console.log(products[0])
-    setStoreState(
-      {...storeState,
-      products : products}
-    )
-    
-    }
+ 
+  const {fetchAllProducts, products} = useContext(StoreContext)
+ //console.log(fetchAllProducts)
+  
 
   useEffect(() => {
-    fetchAllProducts()
+   fetchAllProducts()
+   console.log('fetched data is ',products)
 
-  }, [])
+  }, [products])
 
-const client = Client.buildClient({
-  domain: process.env.REACT_APP_SHOPIFY_DOMAIN,
-  storefrontAccessToken: process.env.REACT_APP_SHOPIFY_API
-});
+
 
 
 

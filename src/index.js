@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import StoreProvider from './context/ShopContext'
+//import StoreProvider from './context/ShopContext'
+import StoreContextProvider from './context/StoreContext'
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreProvider />
+    <StoreContextProvider >
     <App />
-    <StoreProvider />
+    </StoreContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
