@@ -30,7 +30,7 @@ const StoreContextProvider = ({children}) =>  {
           };
           
         case 'CHECKOUT_FETCH': //Fetching an existing checkout
-          console.log('fetch')
+         
           return {
             ...state,
             checkout : action.payload
@@ -50,6 +50,12 @@ const StoreContextProvider = ({children}) =>  {
               
             };
          case 'ADD_ITEM_TO_CHECKOUT': //Add an item to the checkout
+            return {
+            ...state,
+            checkout : action.payload
+                
+          };
+          case 'REMOVE_ITEM_FROM_CHECKOUT': //Add an item to the checkout
             return {
             ...state,
             checkout : action.payload
@@ -115,6 +121,41 @@ const StoreContextProvider = ({children}) =>  {
     );
     dispatch({ type: "ADD_ITEM_TO_CHECKOUT", payload : checkout });
   };
+
+
+  const removeItemFromCheckout = async (variantId) => {
+   
+    const checkoutId = storeData.checkout.id;
+    const lineItemIdsToRemove = [variantId];
+  
+    const checkout = await client.checkout.removeLineItems(checkoutId, lineItemIdsToRemove)
+    .then((checkout) => {
+      dispatch({ type: "REMOVE_ITEM_FROM_CHECKOUT", payload : checkout });
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    
+  }
+
+  const updateCheckout = async (variantId, newQuantity) => {
+   
+    const checkoutId = storeData.checkout.id;
+    const lineItemIdsToRemove = { id: variantId , quantity:newQuantity};
+    console.log(lineItemIdsToRemove)
+  
+    const checkout = await client.checkout.updateLineItems(checkoutId, lineItemIdsToRemove)
+    .then((checkout) => {
+      dispatch({ type: "REMOVE_ITEM_FROM_CHECKOUT", payload : checkout });
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    
+  }
+   
+    
+  
   
   const fetchAllProducts = async () => {
     const products = await client.product.fetchAll();
@@ -126,16 +167,19 @@ const StoreContextProvider = ({children}) =>  {
     const product = await client.product.fetchByHandle(handle);
      dispatch({ type: "FETCH_PRODUCT", payload : product });
   };
+
   
   return (
   //Provider gives the child components (Everything in the <App /> ) access to the following data/functions)
       <StoreContext.Provider value= {{
         storeData,
-        fetchAllProducts : fetchAllProducts,
-        fetchProductByHandle : fetchProductByHandle,
-        createCheckout : createCheckout,
-        fetchCheckout : fetchCheckout,
-        addItemToCheckout : addItemToCheckout
+         fetchAllProducts,
+         fetchProductByHandle,
+         createCheckout,
+         fetchCheckout,
+         addItemToCheckout,
+        removeItemFromCheckout,
+        updateCheckout
         }} >
         { children }
         </StoreContext.Provider>

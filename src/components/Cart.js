@@ -1,6 +1,7 @@
 import React from 'react'
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { StoreContext } from '../context/StoreContext'
+import CartItem from './CartItem';
 
   const Cart = () => {
 
@@ -13,9 +14,15 @@ import { StoreContext } from '../context/StoreContext'
       )
     }
     return (
+     
     <div>
-      {storeData.checkout.lineItems.map(product => 
-        <p>{product.title}</p>)}
+      
+      {storeData.checkout.lineItems.map((product, index) => 
+        <CartItem 
+          product = {product}
+          index = {index} />
+
+      )}
     </div>
   )
 }
