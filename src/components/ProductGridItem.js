@@ -1,20 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductGridItem = ({product}) => {
+const ProductGridItem = ({ product }) => { //product details for each element passed in as props
   return (
         <div 
             className='mb-60 my-10' 
             key={product.handle}>
-                    
-            
-            <Link to={`/product/${product.handle}`}>
+              {/*Each element wrapped in a link to that Product */}
+              <Link to={`/product/${product.handle}`}>
                     <img src={product.images[0].src } className='w-full md:w-11/12 ' />
                     <div className='my-10'>
                         <p>{product.handle}</p>
                         <p>€{product.variants[0].price}</p>
-        </div>
-            </Link>
+                    </div>
+              </Link>
         </div>
   )
 }
