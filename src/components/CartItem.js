@@ -31,7 +31,7 @@ const CartItem = ({ product, index, getSub }) => {
       
         setQuantity(product.quantity)
         setCost(quantity * product.variant.price)
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         updateCheckout(storeData.checkout.lineItems[index].id, parseInt(quantity) )
@@ -40,7 +40,7 @@ const CartItem = ({ product, index, getSub }) => {
            
         }
         
-    }, [cost, quantity])
+    }, [cost, product.quantity]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -62,7 +62,7 @@ const CartItem = ({ product, index, getSub }) => {
           </div>
             
         <div className='basis-1/4 text-center'>
-            <input className='mx-10 w-20 h-20 border-2 text-center' type="text" min='0' max='10' name="quantity" placeholder={product.quantity} 
+            <input className='mx-10 w-20 h-20 border-2 text-center' type="number" min='0' max='10' name="quantity" placeholder={product.quantity} 
                 onChange={handleChange}/>
         </div>
         <p className='basis-1/4 text-center' >€{product.variant.price}</p>

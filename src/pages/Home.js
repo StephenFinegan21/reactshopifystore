@@ -10,7 +10,7 @@ const Home = () => {
     
     useEffect(() => {
         fetchAllProducts() //On page load Fetch all the products in the store
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
     
     //Wait until the data loads before rendering the data
     if (!storeData.products) return <p className='text-center'>Loading</p>

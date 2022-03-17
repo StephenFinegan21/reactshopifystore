@@ -128,7 +128,7 @@ const StoreContextProvider = ({children}) =>  {
     const checkoutId = storeData.checkout.id;
     const lineItemIdsToRemove = [variantId];
   
-    const checkout = await client.checkout.removeLineItems(checkoutId, lineItemIdsToRemove)
+    await client.checkout.removeLineItems(checkoutId, lineItemIdsToRemove)
     .then((checkout) => {
       dispatch({ type: "REMOVE_ITEM_FROM_CHECKOUT", payload : checkout });
     })
@@ -144,7 +144,7 @@ const StoreContextProvider = ({children}) =>  {
     const lineItemIdsToRemove = { id: variantId , quantity:newQuantity};
     
   
-    const checkout = await client.checkout.updateLineItems(checkoutId, lineItemIdsToRemove)
+    await client.checkout.updateLineItems(checkoutId, lineItemIdsToRemove)
     .then((checkout) => {
       dispatch({ type: "REMOVE_ITEM_FROM_CHECKOUT", payload : checkout });
     })

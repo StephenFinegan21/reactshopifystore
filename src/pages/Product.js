@@ -34,7 +34,7 @@ const Product = () => {
     useEffect(() => {
         fetchProductByHandle(params.handle) //Fetch the product - pass in the handle from the url
         
-       }, [params.handle])
+       }, [params.handle]) // eslint-disable-line react-hooks/exhaustive-deps
       
     //Checks that the product object is not empty
      if (!storeData.product.images) {

@@ -13,14 +13,14 @@ import CartItem from './CartItem';
     setCheckoutTotal(storeData.checkout.lineItems.reduce((acc, current)=>
     acc + current.quantity * current.variant.price, 0))
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if(storeData.checkout.lineItems){
     setCheckoutTotal(storeData.checkout.lineItems.reduce((acc, current)=>
     acc + current.quantity * current.variant.price, 0))
     }
-  }, [storeData.checkout])
+  }, [storeData.checkout]) 
   
     //Check that the checkout object is not empty
     if(!storeData.checkout.lineItems){
