@@ -48,13 +48,7 @@ const CartItem = ({ product, index, getSub }) => {
     {error && <div className='w-11/12 mx-auto text-center text-red-400 '><p>{error}</p></div>}
 
 
-    <div className=' w-4/5 mx-auto my-10 py-4  flex items-center justify-around end text-sm font-light border-y-2' >
-        <p className='basis-1/2 text-left '>Product</p>
-        <p className='basis-1/4 text-center'>Quantity</p>
-        <p className='basis-1/4 text-center' >Price</p>
-        <p className='basis-1/4 text-center '>Total</p>
-    </div>
-    <div className=' w-4/5 mx-auto my-4 pb-2 flex items-center justify-around end' key={product.title}>
+    <div className=' w-full mx-auto my-4 pb-2 flex items-center justify-around end' key={product.title}>
         <div className=' basis-1/2 text-center grid grid-cols-2  items-center'>
             <div>
                 <p className='relative top-4 text-lg w-8  bg-slate-200 text-center rounded-full ' >{product.quantity}</p>
