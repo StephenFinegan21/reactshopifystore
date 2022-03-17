@@ -53,7 +53,7 @@ import CartItem from './CartItem';
          
       </div>
       <div className=' p-6  mt-2  '>
-        <div className ='w-1/3 float-right border-t-2 p-4 '>
+        <div className ='   w-full md:float-right border-t-2 p-4 '>
           <h2 className=' text-xl text-right'>Subtotal</h2>
           <p className='font-light text-lg py-2 text-right'>€{checkoutTotal}</p>
           <button className=' w-full block  mx-auto my-2 bg-gray-900 px-8 py-2 text-white'>Purchase</button>

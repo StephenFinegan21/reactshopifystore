@@ -22,17 +22,15 @@ const Nav = () => {
     <nav className='w-full'>
     <div>
        <Link to={'/'}>
-           <h1 className='text-center py-10  text-[3rem] lg:text-[3rem] font-montserrat font-medium text-zinc-500'>Breeze</h1>
+           <h1 className='text-center py-10  text-[2rem] md:text-[3rem] font-montserrat font-medium text-zinc-500'>Breeze</h1>
         </Link>
     </div>
     
-    <div className="absolute top-20 right-20 text-3xl text-gray-700 bg-slate-200 w-12 h-12 flex items-center rounded-xl">
-      <div className='w-4/5 mx-auto flex justify-center'>
-        <Link to={'/cart'}><FaShoppingBasket/> </Link>
-      </div>
-     
+    <div className="absolute top-12 right-20 text-3xl text-gray-700  w-6 h-8  md:right-48 lg:right-64">
+     <Link to={'/cart'}><FaShoppingBasket/> </Link>
     </div>
-    <div className='absolute right-16 top-16 bg-red-300 w-6 rounded-full' >
+
+    <div className='absolute right-16 top-10 bg-red-300 w-6 rounded-full   md:right-44 lg:right-60' >
         <p className='text-center'>{itemsInBasket}</p>
       </div>
     

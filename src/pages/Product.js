@@ -45,7 +45,7 @@ const Product = () => {
       <>
         <div className='w-1/2  mx-auto bg-white grid grid-cols-1 md:grid-cols-2 '>
           
-          <img src={storeData.product.images[0].src} className='w-1/2 py-10 block mx-auto' alt = 'product' />
+          <img src={storeData.product.images[0].src} className='w-4/5 md:w-2/3 lg:w-1/2 py-10 block mx-auto' alt = 'product' />
             
           <div>
             <div>

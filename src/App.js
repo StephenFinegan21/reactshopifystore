@@ -1,5 +1,4 @@
 import React from 'react'
-import { Router } from 'react-router-dom'
 import Home from './pages/Home'
 import Product from './pages/Product'
 import Nav from './components/Nav'
