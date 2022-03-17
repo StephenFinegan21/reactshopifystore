@@ -142,7 +142,7 @@ const StoreContextProvider = ({children}) =>  {
    
     const checkoutId = storeData.checkout.id;
     const lineItemIdsToRemove = { id: variantId , quantity:newQuantity};
-    console.log(lineItemIdsToRemove)
+    
   
     const checkout = await client.checkout.updateLineItems(checkoutId, lineItemIdsToRemove)
     .then((checkout) => {
