@@ -18,7 +18,7 @@ const CartItem = ({ product, index, getSub }) => {
             setError('max 10 items')
             return
         }
-        else if(input % 1 != 0){
+        else if(input % 1 !== 0){
             setError('Whole numbers only')
         }
         else{
